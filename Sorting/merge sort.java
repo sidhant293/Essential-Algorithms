@@ -2,6 +2,8 @@
 Time- O(nlogn) Space-O(n) Stable
 
 merge sort is more prefered for sorting linked list 
+
+merge sort performs bettter with large datasets
 */
 
 void merge(int arr[], int l, int mid, int r)

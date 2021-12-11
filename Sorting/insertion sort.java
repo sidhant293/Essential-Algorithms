@@ -5,7 +5,7 @@
 //sorted subset contains only one element, as one elemnt is already sorted. 
 //take first element from unsorted and insert in sorted
 
-for(int i=1;i<n-1;i++){
+for(int i=1;i<n;i++){
   //value contains element of unsorted subset
   int value=arr[i];
   int j=i-1;

@@ -4,7 +4,8 @@ Graph implemented like src->(des,wt)
 2-> (5,3) (3,4)
 implemented by array of lists  
 */
-
+//TC-O(N*ElogN) where E is edges and N is vertices
+//SC-O(N)
 class Node{
   int ele;
   int wt;

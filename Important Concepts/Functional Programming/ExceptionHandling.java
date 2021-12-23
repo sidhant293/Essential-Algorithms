@@ -38,14 +38,7 @@ To handle exceptions correctly we can wrap one lambda inside another
 public class _ExceptionHandling {
     public static void main(String[] args) {
 
-      BiConsumer<Integer,Integer> biConsumer= (a,b)-> {
-        try{
-          System.out.println(a/b);
-        }catch(Exception e){
-          System.out.println("exception occured");
-        }
-      }
-      
+      BiConsumer<Integer,Integer> biConsumer= (a,b)-> System.out.println(a/b);      
       wrapperLambda(biConsumer).accept(3/0);        
     }
   

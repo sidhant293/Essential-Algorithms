@@ -1,0 +1,8 @@
+1) Difference between fail-fast and fail-safe iterators?
+  Fail-fast iterators throw ConcurrentModificationException exception during iteration. ConcurrentModificationException is thrown when one thread is itertaing over a collection
+  and other thread tries to modify ,add,delete elements in same collection.
+  Fail-safe iterators doesnt throw this exception as they iterate over a clone of a collection. So they require more memory also.
+  
+
+2) Why Map is not included in collection interface?
+  Map stores a key value pair where as Collections only store objects.Also map uses put(K,V) method but Collections have only add(e) method.

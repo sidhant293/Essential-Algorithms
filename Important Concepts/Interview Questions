@@ -6,3 +6,7 @@
 
 2) Why Map is not included in collection interface?
   Map stores a key value pair where as Collections only store objects.Also map uses put(K,V) method but Collections have only add(e) method.
+  
+3) Shadowing in Java?
+  When we override methods, generally in dynamic binding method of object class is called. Eg A a=new B().method() and a method is overriden by B , so method of B will be called
+  But when method is static then method of parent class will be called.

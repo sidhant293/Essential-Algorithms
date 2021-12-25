@@ -1,0 +1,21 @@
+Normal hashmap can be used with synchronized keyword. But this would block whole map when a thread is using it.This reduces efficiency.
+To overcome this we use Concurrent HashMap
+
+Concurrent HashMap uses reentrant lock
+
+Initial capacity--> of hashmap is 16. When elements exceed capacity, capacity increases and rehashing happens.
+Load Factor--> It is a threshold used for resizing. Load factor is when to increase map's capacity to maintain get() and put() operation of complexity O(1). Default=0.75
+Concurrent Level--> Number of threads that can concurrently update the map. Default=16
+
+lock1   {segment1--> (K,V)---(K,V)---(K,V)
+lock2   {segment2--> (K,V)---(K,V)---(K,V)
+.
+.
+.
+lock16  {segment16--> (K,V)---(K,V)---(K,V)
+
+So in Concurrent HashMap only a particular segment is locked.
+
+Read-Write and Read-Read can happen in one segment but Write-Write can't.
+
+This data structure is good  choice if there are more reads than writes

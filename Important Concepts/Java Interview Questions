@@ -10,3 +10,19 @@
 3) Shadowing in Java?
   When we override methods, generally in dynamic binding method of object class is called. Eg A a=new B().method() and a method is overriden by B , so method of B will be called
   But when method is static then method of parent class will be called.
+  
+4) Exception Hierarchy ?
+
+                                                                                Throwable
+                                                                              /            \
+                                                                      Exception               Error
+                                                                       /    \                       |
+                                                                      /      \                      StackOverFlowError,OutOfMemoryError
+                                                                     /        \                
+                                                                 Checked      Unchecked(Runtime)   
+                                                                 |                            |
+                                                                 IOException              NullPointer
+                                                                 SQL Exception            IndexOutOfBoud
+                                                                 ClassNotFound
+                                                                 
+                                                                 

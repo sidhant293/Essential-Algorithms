@@ -11,6 +11,7 @@ keepAliveTime- Threads which do not belong to core pool will live upto this amou
 /*
 1) Fixed ThreadPool- corePoolsize=maxPoolSize=n keepAliveTime=0
   A threadpool of fixed size is created.Rest of the threads will wait in queue. 
+  LinkedBlockingQueue is used to store tasks. Since fixed number of theads can only run so,size of this queue is unbounded.
 */
 
 class Task implements Runnable{
@@ -33,7 +34,7 @@ service.execute(new Task());
 
 /*
 3) SingleThreadExecutor- It uses a blocking queue to store tasks. It has only one thrread. Executor ensures that is thread is killed, it gets recreated.
-It also ensures that tasks run sequentially
+It also ensures that tasks run sequentially.LinkedBlockingQueue is used
 corePoolsize=maxPoolSize=1 keepAliveTime=0
 */
   

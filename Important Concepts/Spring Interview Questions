@@ -1,0 +1,10 @@
+1) Scopes in Spring?
+  
+  -> SINGLETON - It is default scope. Container creates a single instance of that bean; all requests for that bean name will return the same object
+  
+  -> PROTOTYPE - It will return a different instance every time it is requested from the container. It is defined by setting the value prototype to the
+  @Scope annotation in the bean definition.
+  
+  -> REQUEST - Creates a bean instance for a single HTTP request
+  
+  -> SESSION - Creates a bean instance for an HTTP Session

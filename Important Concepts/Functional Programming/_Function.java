@@ -12,7 +12,12 @@ public class _Function {
         
       //join two funtions
         Function<Integer, Integer> newFunction= incrementBy1.andThen(multiplyBy10);
-        System.out.println(newFunction.apply(4));
+        System.out.println(newFunction.apply(4)); // result will be 50
+        
+        incrementBy1.compose(multiplyBy10).apply(4); // result will be 41
+        
+        //a.andThen(b) -> first a will be executed then b
+        //a.compose(b) -> first b will be executed then a
 
 //      *****************BI FUNCTION*********************
         BiFunction<Integer,Integer,String> compareTwoNumbers=

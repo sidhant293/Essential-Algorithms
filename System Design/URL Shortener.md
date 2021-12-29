@@ -3,7 +3,7 @@
 
 Design a url shortner which converts a url to a shortened form.
 
-google.com/some-long-string ----> google.com/h4ux7z5
+google.com/some-long-string ----> bitly.com/h4ux7z5
  
 
 
@@ -14,7 +14,7 @@ google.com/some-long-string ----> google.com/h4ux7z5
 
 ### Data 
 - Long Url- 2KB (2048 chars)
-- Short Url- 7 char (for shortened string) + 10 (for original domain name) = 17 bytes (17char)
+- Short Url- 7 char (for shortened string) + 10 (our domain name-"bitly.com/") = 17 bytes (17char)
 - Created_at - 7 bytes (7 char) (epoch format)
 - Exp_at - 7 bytes (7 char) (epoch format)
 
@@ -46,3 +46,19 @@ Total = 62
 Now as we are converting 7 char string, so total permutations will be 62^7 = 3.5 Trillion
 
 Very less chance of data inconsistency.
+
+#### Base62 Encode 
+
+```java
+String encode_Base62(int num) {
+  String s="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  char[] arr=s.toCharArray();
+  String encode="";
+  while(num>0){
+    encode=arr[num%62]+encode;
+    num/=62;
+  }
+  return encode;
+}
+```
+

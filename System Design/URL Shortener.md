@@ -62,3 +62,30 @@ String encode_Base62(long num) {
 }
 ```
 
+## Technique
+
+So we need to take into account that there will be 
+multiple service running in parallel. The easiest thing
+we can do is ->
+
+- Get a random number
+- Create url encoding for it
+- If encoding exists in DB then repeat above steps again
+- Else save and return url
+
+
+#### Problem
+Initially it will work fine but when number of DB entries
+increases then it will be inefficient.
+
+### Optimization 1
+
+We can take a large number such as 100B (Billion) 
+as a counter value and pass it to our encode function
+so that it will create a unique 7char string.
+
+Save this counter value in a DB Table so that it is accessible
+to all other services.
+
+Now we dont need to every time check wheather encode
+string is unique

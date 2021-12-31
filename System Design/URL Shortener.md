@@ -84,8 +84,15 @@ We can take a large number such as 100B (Billion)
 as a counter value and pass it to our encode function
 so that it will create a unique 7char string.
 
+Increment the counter
+
 Save this counter value in a DB Table so that it is accessible
 to all other services.
 
 Now we dont need to every time check wheather encode
 string is unique
+
+#### Problem
+Counter value stored in a table is a bottleneck as all the
+would first get value of counter and then move ahead. Services
+will not be able to perform in parallel. 

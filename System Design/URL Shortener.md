@@ -50,12 +50,12 @@ Very less chance of data inconsistency.
 #### Base62 Encode 
 
 ```java
-String encode_Base62(int num) {
+String encode_Base62(long num) {
   String s="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
   char[] arr=s.toCharArray();
   String encode="";
   while(num>0){
-    encode=arr[num%62]+encode;
+    encode=arr[(int)(num%62)]+encode;
     num/=62;
   }
   return encode;

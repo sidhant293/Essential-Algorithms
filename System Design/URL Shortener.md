@@ -96,3 +96,5 @@ string is unique
 Counter value stored in a table is a bottleneck as all the
 would first get value of counter and then move ahead. Services
 will not be able to perform in parallel. 
+
+https://medium.com/@sandeep4.verma/system-design-scalable-url-shortener-service-like-tinyurl-106f30f23a82

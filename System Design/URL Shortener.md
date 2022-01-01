@@ -50,7 +50,7 @@ Very less chance of data inconsistency.
 #### Base62 Encode 
 
 ```java
-String encode_Base62(long num) {
+String encode_Base62(long n) {
   String elements = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";  
   StringBuilder sb = new StringBuilder();
   while (n != 0) {
@@ -82,8 +82,7 @@ increases then it will be inefficient.
 
 ### Optimization 1
 
-We can take a large number such as 100B (Billion) 
-as a counter value and pass it to our encode function
+We can take a counter value and pass it to our encode function
 so that it will create a unique 7char string.
 
 Increment the counter
@@ -98,5 +97,27 @@ string is unique
 Counter value stored in a table is a bottleneck as all the
 would first get value of counter and then move ahead. Services
 will not be able to perform in parallel. 
+
+### Optimization 2
+
+Instead having all services get from a counter variable
+we can have a specified ranged counter for each service.
+
+We will also have a Zookeper which will contain information
+about global counter variable and which service has what amount of range.
+
+When range of a service is exhausted or a new service is 
+to be spanned, we can give it new range and increment increment
+in Zookeper.
+
+0 can be initial value of our global counter stored in
+Zookeper. Every service can have range of 10M.
+
+service1 - (0-10M)
+
+service2- (10M-20M)
+
+and so on. Value of global variable will be incremented
+by 10M
 
 https://medium.com/@sandeep4.verma/system-design-scalable-url-shortener-service-like-tinyurl-106f30f23a82

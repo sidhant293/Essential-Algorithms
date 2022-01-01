@@ -104,7 +104,7 @@ Instead having all services get from a counter variable
 we can have a specified ranged counter for each service.
 
 We will also have a Zookeper which will contain information
-about global counter variable and which service has what amount of range.
+about global counter variable and which service has a amount of range.
 
 When range of a service is exhausted or a new service is 
 to be spanned, we can give it new range and increment increment
@@ -120,4 +120,3 @@ service2- (10M-20M)
 and so on. Value of global variable will be incremented
 by 10M
 
-https://medium.com/@sandeep4.verma/system-design-scalable-url-shortener-service-like-tinyurl-106f30f23a82

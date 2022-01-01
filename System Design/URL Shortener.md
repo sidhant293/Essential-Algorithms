@@ -51,14 +51,16 @@ Very less chance of data inconsistency.
 
 ```java
 String encode_Base62(long num) {
-  String s="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  char[] arr=s.toCharArray();
-  String encode="";
-  while(num>0){
-    encode=arr[(int)(num%62)]+encode;
-    num/=62;
+  String elements = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";  
+  StringBuilder sb = new StringBuilder();
+  while (n != 0) {
+    sb.insert(0, elements.charAt(n % 62));
+    n /= 62;
   }
-  return encode;
+  while (sb.length() != 7) {
+    sb.insert(0, '0');
+  }
+  return sb.toString();
 }
 ```
 

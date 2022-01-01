@@ -112,13 +112,7 @@ in Zookeper.
 
 0 can be initial value of our global counter stored in
 Zookeper. Every service can have range of 10M.
-
-service1 - (0-10M)
-
-service2- (10M-20M)
-
-and so on. Value of global variable will be incremented
-by 10M
+Also value of global variable will be incremented by 10M
 
 ![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/URL_Shortener_img1.drawio.png)
 

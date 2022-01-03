@@ -64,6 +64,28 @@ String encode_Base62(long n) {
 }
 ```
 
+#### Base62 Decode 
+```
+public int base62ToBase10(String s) {
+        int n = 0;
+        for (int i = 0; i < s.length(); i++) {
+            n = n * 62 + convert(s.charAt(i));
+        }
+        return n;
+}
+public int convert(char c) {
+        if (c >= '0' && c <= '9')
+            return c - '0';
+        if (c >= 'a' && c <= 'z') {
+            return c - 'a' + 10;
+        }
+        if (c >= 'A' && c <= 'Z') {
+            return c - 'A' + 36;
+        }
+        return -1;
+}
+```
+
 ## Technique
 
 So we need to take into account that there will be 

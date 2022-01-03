@@ -116,3 +116,36 @@ Also value of global variable will be incremented by 10M
 
 ![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/URL_Shortener_img1.drawio.png)
 
+
+### DataBase Design
+Either we can use a RDBMS or NOSQL. If we choose RDBMs
+as our database to store the data then it is efficient
+to check if an URL exists in database and handle 
+concurrent writes. But RDBMs are difficult to scale.
+
+On the other hand, If we opt for “NOSQL”, we can leverage
+scaling power of “NOSQL”-style databases but these 
+systems are eventually consistent.
+
+Since we want our application to be highly consistent, we
+should use RDBMS.
+
+#### Sharding Technique
+We cannot use a single DB instance. We need to shard our
+data so it is easily scaleable. 
+
+Sharding in RDBMS means database tables are partitioned,
+and each partition is put on a separate RDBMS server.
+To lookup or save data we need to go to particular RDBMS
+server and perform operation there.
+
+This all depends on sharding key.
+
+As we know ZooKeeper is keeping track of counter range,
+we can have that range as a sharding key.
+
+Each RDBMS instance will contain 10M records of data.
+When range exceeds 10M, new instance will be spanned. Each
+instance will store counter values as ids
+like 0-10M, 10M-20M,20M-30M.
+

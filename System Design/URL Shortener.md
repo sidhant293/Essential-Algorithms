@@ -66,7 +66,7 @@ String encode_Base62(long n) {
 
 #### Base62 Decode 
 ```java
-int base62ToBase10(String s) {
+int decode_Base62(String s) {
         int n = 0;
         for (int i = 0; i < s.length(); i++) {
             n = n * 62 + convert(s.charAt(i));
@@ -184,3 +184,12 @@ CREATE TABLE tinyUrl (
                                            -- INDEX (originalUrl)
 );
 ```
+
+
+### Fetching Data
+
+When we get tiny url (For example 1L9zO9O) we can use 
+decode_Base62 function to get the counter value (100000000000). 
+Once we have this value, we can get which database this
+counter ranges belongs to from zookeeper and query that DB. 
+

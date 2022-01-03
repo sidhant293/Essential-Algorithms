@@ -149,3 +149,16 @@ When range exceeds 10M, new instance will be spanned. Each
 instance will store counter values as ids
 like 0-10M, 10M-20M,20M-30M.
 
+#### Schema
+
+```sql
+CREATE TABLE tinyUrl (
+    id  BIGINT                 NOT NULL,  AUTO_INCREMENT
+    shortUrl  VARCHAR(7)       NOT NULL,
+    originalUrl  VARCHAR(400)  NOT NULL,
+    userId   VARCHAR(50)       NOT NULL,
+    automatically on primary-key column
+                                           -- INDEX (shortUrl)
+                                           -- INDEX (originalUrl)
+);
+```

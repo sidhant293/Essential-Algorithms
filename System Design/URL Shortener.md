@@ -117,7 +117,7 @@ Also value of global variable will be incremented by 10M
 ![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/URL_Shortener_img1.drawio.png)
 
 
-### DataBase Design
+## DataBase Design
 Either we can use a RDBMS or NOSQL. If we choose RDBMs
 as our database to store the data then it is efficient
 to check if an URL exists in database and handle 
@@ -130,7 +130,7 @@ systems are eventually consistent.
 Since we want our application to be highly consistent, we
 should use RDBMS.
 
-#### Sharding Technique
+### Sharding Technique
 We cannot use a single DB instance. We need to shard our
 data so it is easily scaleable. 
 
@@ -149,7 +149,7 @@ When range exceeds 10M, new instance will be spanned. Each
 instance will store counter values as ids
 like 0-10M, 10M-20M,20M-30M.
 
-#### Schema
+### Schema
 
 ```sql
 CREATE TABLE tinyUrl (

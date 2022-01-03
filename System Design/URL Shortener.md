@@ -156,7 +156,7 @@ CREATE TABLE tinyUrl (
     id  BIGINT                 NOT NULL,  AUTO_INCREMENT
     shortUrl  VARCHAR(7)       NOT NULL,
     originalUrl  VARCHAR(400)  NOT NULL,
-    userId   VARCHAR(50)       NOT NULL,
+    exp   VARCHAR(7)       NOT NULL,
     automatically on primary-key column
                                            -- INDEX (shortUrl)
                                            -- INDEX (originalUrl)

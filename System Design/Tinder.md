@@ -30,3 +30,6 @@ present.
 
 Recommendation query will be fired only on the servers given by mapper.
 Thus we reduced our dataset.
+
+
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Recomendation_Tinder.drawio.png)

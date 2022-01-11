@@ -20,4 +20,13 @@ Recommendations will be made on preferences of a user.
 
 ### Geo Sharding
 
+All of the user data will be divided into different shards based
+on geographical locations. 
 
+We also need to create a mapper service which will tell a user
+that for him where the data related to him is present.We will give
+it (lat,lon) location indexes and it will give us servers where data might be
+present.  
+
+Recommendation query will be fired only on the servers given by mapper.
+Thus we reduced our dataset.

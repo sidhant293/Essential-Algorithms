@@ -34,3 +34,23 @@ Thus we reduced our dataset.
 ### Design of Recommendation Service
 
 ![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Recomendation_Tinder.drawio.png)
+
+Distributed asynchronus queue is used to trigger recommendations.
+We are not making recommendations realtime as it will be
+time consuming and a bad user experiance.
+
+Async queue and the queue will carry requests of different
+users.These requests will be send to Search/Rank service.
+
+Search service will filter, rank and create a list of recommendations
+for each user.It will do this with the help of mapper service.
+Search service will query only the servers given by mapper service.
+
+These list of recommendations will be stored in DB. Suppose a list of
+200 recommendations is generated and stored in DB. From this list
+30-40 users will be taken and stored in cache in advance.
+
+- When user opens his app, request is send to recommendation service to get recommendations
+- Recommendation service hits the cache and gives list of 30-40 recommendations. Also it hits DB to get further recommendations.
+- While scrolling(user is scrolling through list), when list is about to get finished, app again hits cache to get list. Again when list is delivered, request is triggered to get further recommendations from DB in advance.
+

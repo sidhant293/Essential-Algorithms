@@ -51,6 +51,6 @@ These list of recommendations will be stored in DB. Suppose a list of
 30-40 users will be taken and stored in cache in advance.
 
 - When user opens his app, request is send to recommendation service to get recommendations
-- Recommendation service hits the cache and gives list of 30-40 recommendations. Also it hits DB to get further recommendations.
-- While scrolling(user is scrolling through list), when list is about to get finished, app again hits cache to get list. Again when list is delivered, request is triggered to get further recommendations from DB in advance.
+- Recommendation service hits the cache and gives list of 30-40 recommendations. Also it hits DB in advance to populate further recommendations in cache.
+- While swiping (user is scrolling through list), when list is about to get finished, app again hits cache to get list. Again when list is delivered, request is triggered to get further recommendations from DB in advance. If we are about to reach at the end of recommendations list in DB, then again recommendations are calculated 
 

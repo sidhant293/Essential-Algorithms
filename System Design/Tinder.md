@@ -54,3 +54,18 @@ These list of recommendations will be stored in DB. Suppose a list of
 - Recommendation service hits the cache and gives list of 30-40 recommendations. Also it hits DB in advance to populate further recommendations in cache.
 - While swiping (user is scrolling through list), when list is about to get finished, app again hits cache to get list. Again when list is delivered, request is triggered to get further recommendations from DB in advance. If we are about to reach at the end of recommendations list in DB, then again recommendations are calculated 
 
+#### DataBase Design
+
+To store users data in geo-shards we can use RDBMS table like
+
+- UserId- PK
+- Location Data- SK
+- Last Login Time- SK
+- UserData (gender,age,interests...)- SK
+
+
+To store recommendation list, we can use NOSQL and shard it on
+UserId
+
+- UserId- unique 
+- Recommendation List - json contains users 

@@ -69,3 +69,66 @@ UserId
 
 - UserId- unique 
 - Recommendation List - json contains users 
+
+
+
+## Swipe Service
+
+This service is used to handle swipes and what happens if
+both users swipe right, i.e they get matched.
+
+This service can be setup in multiple ways-
+
+- Store the data according to geo shards. Each database will be setup according to the number of geo servers and mapping service will be used to get to the appropriate database
+- Instead of geo shards, each city should have one database where swipe and match data of all users will be stored.
+
+Now the problem with first approach is that swipe data of a user should be duplicated to multiple geo shards.
+As we dont know where the other user will be present, so if other user also swipes right then both should get matched. This will only happen if swipe data of both users is present in same geo shard.
+
+The other problem is, location of a user will not stay same. As a city is further divided into geo shards, if swipe data of a user is present in one shard and user changes his location (goes to work from home or vice versa), then his geo shard will change. He might not be able to match with other person.
+
+If we use one database for a city then these problems will not occur. Duplication of data will not be required (special case if users live on border of cities).
+And change of location within a city will also not be a problem.
+
+This database can also be further sharded on primary keys to remove bottleneck.
+
+
+
+### Design of Swipe Service
+
+#### Database Design
+
+We can use a key value storage (like AWS DynamoDB) to store swipe information of users.
+Unique key will be combination of userId's of both users in sorted format
+
+```
+UserId1_UserId2:{
+    updatedOn: Timestamp,
+    likes:[
+        {
+            likerId: UserId1,
+            likedId: UserId2,
+            time: Timestamp
+        },
+        {
+            likerId: UserId2,
+            likedId: UserId1,
+            time: Timestamp
+        }
+    ]
+}
+```
+
+Likes Data older than one month can be removed using cron jobs which will run periodcially
+
+A RDBMS instance will also be used to store only matched data of users
+
+- UserId
+- UserId
+- Timestamp
+
+PK is combination of userids which are matched. This DB will be stored so that we get to know matching information of each user and whome they can text.
+
+#### Flow
+
+

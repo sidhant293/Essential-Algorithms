@@ -133,3 +133,17 @@ PK is combination of userids which are matched. This DB will be stored so that w
 
 ![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Swipe_Tinder.drawio.png)
 
+
+We don't need to store the data of left swipes(rejections) as these profiles can be 
+shown again later some point of time. 
+
+Instead we will store data of right swipes only. When a person right swipes, data gets stored in key-value storage.
+
+This data is also forwarded to Recommendation Service so that liker's profile can again be ranked and showed on top to other user.
+
+When both users like each other's profiles then data is inserted into RDBMS, which contains only matched data.
+This RDBMS data will be used so that users can chat to each other.
+
+Key Value storage will be sharded based on unique key to remove single point of failer , similarly RDBMS will be 
+sharded on primary key.
+

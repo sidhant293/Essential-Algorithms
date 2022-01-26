@@ -147,3 +147,6 @@ This RDBMS data will be used so that users can chat to each other.
 Key Value storage will be sharded based on unique key to remove single point of failer , similarly RDBMS will be 
 sharded on primary key.
 
+Swipe data of 20-30 profiles together can be sent to Swipe Service, no need to hit API after each swipe. Matching of two users need not to be in realtime, some
+delay is ok.
+

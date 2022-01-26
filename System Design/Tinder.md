@@ -131,4 +131,5 @@ PK is combination of userids which are matched. This DB will be stored so that w
 
 #### Flow
 
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Swipe_Tinder.drawio.png)
 

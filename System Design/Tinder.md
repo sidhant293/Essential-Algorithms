@@ -1,7 +1,12 @@
 
 # Tinder Design
 
-A brief description of what this project does and who it's for
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Tinder_Design.drawio.png)
+
+- Chat Service is used for chatting between different users
+- Swipe Service is used to handle swipes and matching
+- Recommendation Service shows profile recommendations
+- Profile Service is used for user registeration and stores profile data
 
 
 ## Recommendation Service

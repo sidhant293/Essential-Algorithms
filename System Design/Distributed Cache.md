@@ -36,4 +36,6 @@ So we need to use locks appropriatly to reduce latency and also have consistency
 
 - Concurrent writes cannot happen at same time as it will conflict with read and other writes also. We need to provide locks in this case. We should not provide lock on whole hashmap as latency will increase.Instead we can lock the appropriate bucket in hashmap where write operation is happening. So that reads/writes of other buckets dont suffer. (Concurrent HashMap)
 
+In this approach we can do two things, if write request comes we can directly remove from async queue and then update hashmap and push in queue , else we can push the write requests in async queue.
 
+In first approach wrong data might get evicted but cache will be really fast and in the second approach data order will be correct but wrties might take a lot of time.

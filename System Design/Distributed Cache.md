@@ -32,8 +32,8 @@ not be single threaded, it should work on multithreading environment to reduce l
 
 So we need to use locks appropriatly to reduce latency and also have consistency.
 
-- Concurrent reads can happen in same time. When a read happens, we can read from the hashtable directly and then asynchronously update the doubly linked list. An asynchronous queue can introduced in which all the keys will be pushed and nodes regarding those keys will be moved in front of linked list  
+- Concurrent reads can happen in same time. When a read happens, we can read from the hashtable directly and then asynchronously update the doubly linked list. An asynchronous queue can introduced in which all the keys will be pushed and nodes regarding those keys will be moved in front of linked list( keys might not be present as they can get evicted, so if not present then skip)
 
 - Concurrent writes cannot happen at same time as it will conflict with read and other writes also. We need to provide locks in this case. We should not provide lock on whole hashmap as latency will increase.Instead we can lock the appropriate bucket in hashmap where write operation is happening. So that reads/writes of other buckets dont suffer. (Concurrent HashMap)
-When we write into appropriate node, then it again should be pushed to asynchronous queue so that its position gets updated.
+
 

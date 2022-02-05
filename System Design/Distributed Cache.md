@@ -86,3 +86,6 @@ purge:
 
         remove lock
 ```
+
+### Evict 
+Nodes are removed from tail of DLL and also from hashmap as a batch operation

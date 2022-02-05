@@ -47,3 +47,22 @@ next- pointer to next node
 ```
 
 ### Offer
+
+```python
+offer(node e):
+# as this function will run in multithreaded system so multiple threads can access same function at same time. If same node is already present at head then dont add it again as it will contain duplicates
+    if head!=e:  
+
+        assign to c <-  e
+        new node n(e)    
+        # hasmap used is concurrent hashmap, so only one thread can perform write operation for same bucket
+        if add n to entry in hashmap:
+
+            add n to head of DLL
+            # as multiple threads can do this, if one thread has already marked for cleanup then no need to do it again
+            if c is not already null:
+
+                set c.key to null
+                add c to cleanup queue
+
+```

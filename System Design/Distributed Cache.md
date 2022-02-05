@@ -67,3 +67,22 @@ offer(node e):
                 add c to cleanup queue
 
 ```
+
+### Purge
+Purge operation is handled in bulk. When size of cleanup queue reaches beyond some threshold then purge is called
+
+Purge is done using single thread only as it updates prev and next nodes, in order to use multiple threads
+locks should be used. To avoid this we use only one thread
+
+```python
+
+purge:
+# size_queue is an atomic integer
+    if size_queue > threshold:
+        
+        accquire lock on DLL
+
+        remove from queue and update prev & next pointer of that node
+
+        remove lock
+```

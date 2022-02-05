@@ -50,7 +50,8 @@ next- pointer to next node
 
 ```python
 offer(node e):
-# as this function will run in multithreaded system so multiple threads can access same function at same time. If same node is already present at head then dont add it again as it will contain duplicates
+# as this function will run in multithreaded system so multiple threads can access same function at same time.
+# If same node is already present at head then dont add it again as it will contain duplicates
     if head!=e:  
 
         assign to c <-  e

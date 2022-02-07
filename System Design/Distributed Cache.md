@@ -41,7 +41,7 @@ This is the multithreaded design ->
 The strucuture of an node in hashmap is
 ```
 key- key of map
-node- contains value 
+value- contains value 
 prev- pointer to previous node
 next- pointer to next node 
 ```
@@ -76,7 +76,7 @@ locks should be used and it will be complex. To avoid this we use only one threa
 
 ```python
 
-purge:
+purge():
 # size_queue is an atomic integer
     if size_queue > threshold:
         

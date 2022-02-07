@@ -72,7 +72,7 @@ offer(node e):
 Purge operation is handled in bulk. When size of cleanup queue reaches beyond some threshold then purge is called
 
 Purge is done using single thread only as it updates prev and next nodes, in order to use multiple threads
-locks should be used. To avoid this we use only one thread
+locks should be used and it will be complex. To avoid this we use only one thread
 
 ```python
 

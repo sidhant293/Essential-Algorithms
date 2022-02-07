@@ -108,3 +108,19 @@ get(key):
             put(e)
     return e.value
 ```
+
+### Put
+```python
+put(node e):
+    #as it is concurrent hashmap, only one thread will exceed
+    Node ex=map.putIfAbsent(e)
+
+    if we have existing entry:
+        return ex
+    else if absent:
+        offer(e)
+        #when map becomes larger than required size, remove data from tail and hashmap
+        if size_map >= evict_threshold:
+            evict some entries
+    return e
+```

@@ -100,7 +100,7 @@ get(key):
     #non blocking operation
     lookup in hashmap:
         if key found, we have a node e:
-            offer(e)  #add node at head of DLL
+            offer(e)  #add node at head of DLL and in hashmap
             try purge()
         else:
             load from DB 

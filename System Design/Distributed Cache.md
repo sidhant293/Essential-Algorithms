@@ -89,3 +89,22 @@ purge():
 
 ### Evict 
 Nodes are removed from tail of DLL and also from hashmap as a batch operation
+
+### Get
+In get operation we will not use locks because performance will
+suffer badly. As we aren't using locks, a strict ordering of nodes
+is not preserved. But still we will have approximately least recently used nodes at tail of DLL
+
+```python
+get(key):
+    #non blocking operation
+    lookup in hashmap:
+        if key found, we have a node e:
+            offer(e)  #add node at head of DLL
+            try purge()
+        else:
+            load from DB 
+            create a node e
+            put(e)
+    return e.value
+```

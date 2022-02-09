@@ -142,3 +142,4 @@ and reshifting of requestId will happen which will lead to major cache miss.
 
 In order to prevent this, we will do consistence hashing.
 
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/consistence_hashing_distributed_cache.drawio.png)

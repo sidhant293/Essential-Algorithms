@@ -124,3 +124,21 @@ put(node e):
             evict some entries
     return e
 ```
+
+
+## Consistence Hashing
+
+Now we want to put our algo into multiple servers and run them in parallel.
+But there is a problem, as cached data is stored inside servers, they might get lost.
+Or we might need to scale up and add more servers if load increases or also scale down if we dont need those servers running in parallel
+
+If we try simple hashing and do scale up or down, there will be a major reshifting of data and everything would be a cache miss.
+
+eg suppose we have 5 servers, if any request comes we first hash it and then hash(requestId)%5.
+
+So data will be distributed to one of the 5 servers. Now if we add one more server then hash(requestId)%6 will happen
+and reshifting of requestId will happen which will lead to major cache miss.
+
+
+In order to prevent this, we will do consistence hashing.
+

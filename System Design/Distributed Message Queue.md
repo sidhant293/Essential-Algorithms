@@ -12,7 +12,7 @@ One producer will give message to only one consumer , but multiple producers and
  
 ## 1 Producer - 1 Consumer
 
-![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Message Queue 1-pro 1-con.drawio.png)
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Message_Queue_1-pro_1-con.drawio.png)
 
 We know only one consumer and one producer is configured.
 There is no point of making multiple threads, only one thread can do the work(interviewer may disagree)

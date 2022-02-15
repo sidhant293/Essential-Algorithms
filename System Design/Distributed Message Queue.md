@@ -1,1 +1,46 @@
+
 # Distributed Message Queue
+
+So we want to design a system which takes up messages from the producers and
+send them to consumers at scale.
+
+System should be scalable, highly available, high performance and durable(doesnt looses data)
+
+One thing to note here is, this is not like publisher subscriber (message published goes to multiple subscribers)
+
+One producer will give message to only one consumer , but multiple producers and consumers can also be configured.
+ 
+## 1 Producer - 1 Consumer
+
+//link
+
+We know only one consumer and one producer is configured.
+There is no point of making multiple threads, only one thread can do the work(interviewer may disagree)
+
+Here we can make use of a polling method, producer will push message to the queue.
+Thread will remove the message from queue and process and send it to consumer.
+
+But what happens when producers and consumers increase
+## Multiple Producer - Multiple Consumer
+
+//link
+
+Now as producers and consumers increase (1-producer will send to only 1-consumer)
+Push mechanism will be used.
+We can't expect one queue to handle all the load. So multiple queues should be created.
+Also multi-threading will be used. Queue created will be synchronized.
+
+We can increase or decrease number of queues depending on the load.
+
+One load balancer will be used in front of the application, when a producer sends a message , it can be routed to any queue.
+
+When message pushed in queue, it will be also stored in DB so that is queue crashes data can be loaded again.
+
+Multiple threads running will perform the following tasks->
+- Pop data from the queue
+- Check which sever it should be routed to
+- Consult zookeeper for the details of consumer
+- Send message to consumer and update in DB
+- Also retry multiple times, if not consumed update in DB
+
+Zookeeper will keep track of all the producers which are alive

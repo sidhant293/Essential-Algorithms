@@ -12,7 +12,7 @@ One producer will give message to only one consumer , but multiple producers and
  
 ## 1 Producer - 1 Consumer
 
-//link
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Message Queue 1-pro 1-con.drawio.png)
 
 We know only one consumer and one producer is configured.
 There is no point of making multiple threads, only one thread can do the work(interviewer may disagree)
@@ -23,7 +23,7 @@ Thread will remove the message from queue and process and send it to consumer.
 But what happens when producers and consumers increase
 ## Multiple Producer - Multiple Consumer
 
-//link
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Message Queue multi-pro multi-con.drawio.png)
 
 Now as producers and consumers increase (1-producer will send to only 1-consumer)
 Push mechanism will be used.

@@ -44,3 +44,15 @@ Multiple threads running will perform the following tasks->
 - Also retry multiple times, if not consumed update in DB
 
 Zookeeper will keep track of all the producers which are alive
+If multiple instences of same consumer want to configured the load balancer should be present.
+
+### Database
+
+What type of databse should be used to store messages so that if a queue fails then messages can be recovered.
+
+It will depend on various situations, since here we dont need ACID properties and also we may store unstructured data.
+
+We can use a file system to store data. Data can be split across one 1hr each, that means every 1hr new file can be created where whole data of that hour will be stored
+When data is pushed inside any queue, data will be inserted in file and its line number will be noted.
+
+Later if we want to update data (as data consumed by consumer or error occured) we can simply binary search on file and get that record.

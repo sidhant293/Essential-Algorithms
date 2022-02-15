@@ -23,7 +23,7 @@ Thread will remove the message from queue and process and send it to consumer.
 But what happens when producers and consumers increase
 ## Multiple Producer - Multiple Consumer
 
-![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Message Queue multi-pro multi-con.drawio.png)
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Message_Queue_multi-pro_multi-con.drawio.png)
 
 Now as producers and consumers increase (1-producer will send to only 1-consumer)
 Push mechanism will be used.

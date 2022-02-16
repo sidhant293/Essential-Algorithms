@@ -56,3 +56,10 @@ We can use a file system to store data. Data can be split across one 1hr each, t
 When data is pushed inside any queue, data will be inserted in file and its line number will be noted.
 
 Later if we want to update data (as data consumed by consumer or error occured) we can simply binary search on file and get that record.
+
+## Final Thoughts
+
+This architecture is spread across multiple servers , each server has its own database. Request goes to the server through load balancer and server forwards it to
+appropriate consumer.
+Here we say that each queue contains messages which are going to be send to different consumers(one message to only one consumer). We can also make queued which is dedicated 
+to only one consumer, i.e it will contain messages which are going to only one customer.

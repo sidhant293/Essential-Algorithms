@@ -115,3 +115,35 @@ overhead - 20 for hashmap and redis each
 
 for 1 million users = 1.6GB
 It uses far less memory
+
+
+## Distrubuted System
+
+Minimum number of request allowed in 1 hr =500
+Users= 1M
+Minimum total requests in one hour = 1M*500=500M
+
+One server cannot handle these requests. So we need to have distrubued servers.
+
+Each server will run on the same logic explained earlier.
+
+#### Important Points
+- We can use usedId to shard data
+- We can have different rate limiters for different API's. eg- for a Url Shortener service we can have different limiters on createUrl and deleteUrl API
+
+So , when a user sends a request it first goes to the load balancer and then
+it goes to appropriate server. Since different servers have different rate limiters , so there is inconsistency
+User can reach limit in one server but can still pass through another server
+
+One work around is that we can use sticky sessions. Request of a particular user will go to particular server only.
+But the problem with this approach is that if a server is down then a set of users will be down also
+
+Another way is to use a central storage service such as redis, which was already explained in algorithm. It will work fine but increase some latency.
+
+#### Hybrid Model
+We can use a hybrid model. We can create different group of servers like G1,G2,G3....
+Each group will have some servers. So one group will handle a range of userIds. Eg G1 has 1-5000 userIds,
+G2 has 5000-10000 etc. Each group will have its own Redis storage also.
+
+So when request comes, load balancer forwards it to specific group, but inside group it can go to any server.
+If one server is down, others can handle the load. Each group can scale up and down accordingly.

@@ -1,10 +1,17 @@
 
 # Rate Limiter
 
+### Requirements
 System should be
-- Highly Available
+- Consitence (accurately limit excessive requests)
 - Less Latency
+- Less Memory
+- Scalable
+- Fault tolerant
 
+So using CAP theorm it needs to be consistence and partition tolerant (availablilty will suffer)
+
+#### Note- Rate limiter should be implemented on server side. Client side is unreliable place as it can be easily be forged by malicious softwares
 
 ## Fixed Window
 

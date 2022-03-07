@@ -51,13 +51,7 @@ If UserId is present and a request comes then
 - Count total entries in SortedSet. If > threshold then reject
 - If < threshold then add in SortedSet and accept
 
-Here as you know SortedSet will be shared by reference, so if multiple threads remove or add timestamps, then it would reflect in all other threads also.
-So race condition won't happen.
-
-#### Remember threads never run in parallel, they always context switch
-
-eg if one thread is about to remove a timestamp, context switch happens and other threads removes old timestamps. Then again context switch happens and first thread
-again beomces active, then see old nodes are already removed, no need of locks.
+Opwrations in sortedSet are atomic operations. So race condition won't happen.
 
 #### Lets calculate data required
 

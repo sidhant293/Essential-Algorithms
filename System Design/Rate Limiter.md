@@ -168,3 +168,12 @@ G2 has 5000-10000 etc. Each group will have its own Redis storage also.
 
 So when request comes, load balancer forwards it to specific group, but inside group it can go to any server.
 If one server is down, others can handle the load. Each group can scale up and down accordingly.
+
+
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Rate_Limiter.drawio.png)
+
+
+- This image is for only one group of servers
+- Load balancer sends request to rate limiter
+- Rate limiter gets rules from cache then based on those rules it checks on redis
+- If accepted then it sends request to servers or else it rejects request by error 429 (too many requests)

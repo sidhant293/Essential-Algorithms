@@ -93,11 +93,8 @@ Using sliding window and calulating as it exceeds threshlod so reject
 The process is->
 - Calculate sum of all slots, > 500 reject
 - Calculate value , > 10 reject
-- If value < 10 , then increment counter and again calulate if < 10 then accept else reject
 
-We caluated two times because multiple threads will be running. If two threads concurently reads the counter and calulate value, then both will get into.
-
-But suppose if one calulates value, context switch and other also calulate - increment -accept. When first thread runs, it increments and again calulates then it might get rejected if > threshlod.
+As said earlier, operations in redis are atomic operations. We can also chain operations to make a transaction which is also atomic. Race condition will not happen.
 
 To store, we will use same hashmap 
 userId : Redis Cache
@@ -117,6 +114,29 @@ overhead - 20 for hashmap and redis each
 for 1 million users = 1.6GB
 It uses far less memory
 
+## Generic Design
+
+To use a same rate limiter and limit over different aspects we can create a generic rate limiter which will limit over different conditions eg only 5 emails a day
+are allowed or only 10 login requests are allowed per minute. To make rate limiter generic we need to define a set of rules.
+
+```
+domain: auth
+key: login
+rate_limit:
+    unit: minute
+    requests: 10
+```
+
+```
+domain: messaging
+key: email
+rate_limit:
+    unit: day
+    requests: 5
+```
+
+Here domian will be microservice we want to limit, key is what particular thing we want to limit for that microservice , unit is unit of time and requests is allowed requests
+per unit
 
 ## Distrubuted System
 

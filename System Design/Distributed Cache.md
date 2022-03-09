@@ -128,6 +128,11 @@ put(node e):
 
 ## Consistence Hashing
 
+Now we want to put our algo into multiple servers and run them in parallel.
+But there is a problem, as cached data is stored inside servers we might need to scale up and add more servers if load increases or also scale down 
+if we dont need those servers running in parallel. Scaling up and down will lead to hudge reshifting of data so hudge cache misses.
+So we use consistence hashing->
+
 https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Must%20Know/Consistence%20Hashing.md#consistence-hashing
 
 

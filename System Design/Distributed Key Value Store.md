@@ -68,5 +68,35 @@ Still their will be some conflicts, we should create a consistency model
 
 ### Consistency Model 
 
+First thing comes to mind is to use timestamps for versioning of data. But this might not be a right approach because to calculate time servers should 
+be in sync, that is not always possible. A central clock can also be introduced but that might not be always available.
 
+Instead we can use vector clocks.
 
+When data is updated we record the server which updated it and how many times.
+eg
+```
+                                                          D1
+                                                          |     Sa
+                                                          |
+                                                          V
+                                                          D2[(Sa,1)]
+                                                          |
+                                                          |     Sa
+                                                          V
+                                                          D3[(Sa,2)]
+                                                          |
+                                                          |
+                                                         /  \
+                                                   Sb   /    \  Sc
+                                                       /      \
+                                         D4[(Sa,2)(Sb,1)]    D5[(Sa,2)(Sc1)]             
+```
+Suppose data D1 is updated by server Sa, so its timestamp is D2[(Sa,1)]. Again when it is updated by Sa it becomes D2[(Sa,2)]. When data is updated it will be 
+replicated to some W nodes.
+As we can see D2 is straight ancestor of D3 there is no conflict till here.
+
+Now from D3, Sb and Sc both modify data to D4 and D5. There is conflict. But as we know data will be replicated to some W nodes. Some nodes will have D3, some
+will have D4. When data is read from certain R nodes, conflict will be resolved based on how many nodes have certain data and probability of those having correct data.
+
+In this way system is partial consistence for short period of time, but shows good level of consistency after certian time has passed after an upadte

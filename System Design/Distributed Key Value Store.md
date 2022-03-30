@@ -5,7 +5,7 @@ Make key value store that stores a large amount of data.
 It should be->
 - Highly available
 - Should Handle Failures
-- Less Latnecy
+- Less Latency
 - Strongly Consistence
 
 A system should be designed such that it can handle failures.
@@ -29,7 +29,7 @@ So we need to partition data. We can use userId as partition key.
 
 Consistence hashing will be used to partition data equally.
 
-//// Link of consistence hashing
+https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Must%20Know/Consistence%20Hashing.md
 
 This helps in automatic scale up and down of data.
 

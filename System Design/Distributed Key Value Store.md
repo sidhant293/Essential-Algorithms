@@ -11,7 +11,7 @@ It should be->
 A system should be designed such that it can handle failures.
 Using CAP therorm then system can only be highly available or consistence.
 
-We want this to be highly available. We can make it strongly consistent(partial consistency).
+We want this to be highly available. We can make it eventually consistent(partial consistency).
 
 
 ## Initial Design

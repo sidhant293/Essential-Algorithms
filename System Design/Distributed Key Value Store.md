@@ -102,3 +102,48 @@ Now from D3, Sb and Sc both modify data to D4 and D5. There is conflict. But as 
 will have D4. When data is read from certain R nodes, conflict will be resolved based on how many nodes have certain data and probability of those having correct data.
 
 In this way system is partial consistence for short period of time, but shows good level of consistency after certian time has passed after an upadte
+
+## Failures
+
+Multiple servers will be running in parallel, but it is possible that some servers go down. First we need to detect failures and then we need to handle them. 
+
+### Detecting Failures
+
+To detect failures, we can use gossip protocol. 
+-	Each node maintains a members list which contains heartbeat counter and timestamps of other nodes.
+-	Each node will send heartbeat to some random set of nodes.
+-	Nodes update the heartbeat counters and timestamps of current node. They also share the updated members list with each other.
+-	If a timestamp of some node is not updated from long time then that node is considered offline.
+
+### Handling Failures
+
+When a failure is detected, some steps need to be applied until that node comes back online. If a server is unavailable, then another server which is already running processes the requests temporarily.
+
+Writes will be done to W healthy servers and reads will occur from R healthy severs. When the down server is back online, updates are pushed back to original server.
+
+In a distributed environment servers will be going down and then coming up. This will create inconsistency of data. Periodically servers need to synchronize data. For this we can use Merkle Tree.
+
+Suppose we have 12 keys (1-12), we will create buckets in which keys will be present. Here we can have 4 buckets having 3 keys each.
+Bucket 1- 1,2,3  |  Bucket 2- 4,5,6 | Bucket 3- 7,8,9 | Bucket 4- 10,11,12
+
+-	Now each key in bucket will be hashed by using a uniform hashing function
+-	After hashing each key in bucket, one hash node per bucket will be created
+-	Upward tree is created by calculating hashes of children
+
+```
+                                                              Hash(1,2,3,4)
+                                                                    |
+                                                                    |
+                                                                  /   \
+                                                                 /     \
+                                                           Hash(1,2)   Hash(3,4) 
+                                                               |           |
+                                                               |           |
+                                                             /   \        /  \
+                                                            /     \      /    \
+                                                        H(1)      H(2)  H(3)  H(4)
+```
+
+Merkle Tree of each replica is created. To compare two trees, start by comparing the root hashes, if they are equal then no problem. If they are not 
+equal then compare the left and right node hashes. We can traverse the tree in bottom down fasion and get to know which bucket is not synchronized and sync
+those buckets only. 

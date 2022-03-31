@@ -16,11 +16,13 @@ We want this to be highly available. We can make it eventually consistent(partia
 
 ## Initial Design
 
-So we can store data in cache inside servers. And also save key-value pairs
-in log based DB. If data is present in cache then return else hit the DB.
-We can make a write about cache(changes are made in cache first and then DB)
+So we can store data in cache inside servers. As data is very hudge so it can't fit inside cache. It needs to be presisted into disk. Also in case of server faliure
+data will be lost, so it should be saved in disk stoage. 
 
-How data is stored in log based DB we can discuss it at end, first consider how hudge data is handled.
+We can use a write about cache(changes are made in cache first and then DB). Log based DB can be used to store data into disk.
+
+Don't stress on log based DB unless interviewer asks.
+/// link for log based DB
 
 ## Data Partition
 

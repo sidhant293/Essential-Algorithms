@@ -22,7 +22,6 @@ data will be lost, so it should be saved in disk stoage.
 We can use a write about cache(changes are made in cache first and then DB). Log based DB can be used to store data into disk.
 
 Don't stress on log based DB unless interviewer asks.
-/// link for log based DB
 
 ## Data Partition
 
@@ -31,7 +30,7 @@ So we need to partition data. We can use userId as partition key.
 
 Consistence hashing will be used to partition data equally.
 
-https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Must%20Know/Consistence%20Hashing.md
+[Consistence hashing](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Must%20Know/Consistence%20Hashing.md)
 
 This helps in automatic scale up and down of data.
 
@@ -147,3 +146,8 @@ Bucket 1- 1,2,3  |  Bucket 2- 4,5,6 | Bucket 3- 7,8,9 | Bucket 4- 10,11,12
 Merkle Tree of each replica is created. To compare two trees, start by comparing the root hashes, if they are equal then no problem. If they are not 
 equal then compare the left and right node hashes. We can traverse the tree in bottom down fasion and get to know which bucket is not synchronized and sync
 those buckets only. 
+
+## Persisting Data
+
+Data will not be stored in servers all the time. It will be saved in disk eventually.
+[Log Based DB](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Must%20Know/Log%20Based%20Database.md)

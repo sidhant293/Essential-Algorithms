@@ -31,3 +31,9 @@ Converting ms to years= 2199023255551ms / 1000 / 365 days/24hrs/3600 sec = 69 ye
 Datacenter IDs and machine IDs are chosen at the startup. These values do not change as that will lead to ID conflicts. Once the system is up and running these values are fixed for specific datacenters and machines. 
 
 ## Sequence Number
+
+Sequence Number is of 12 bits. 2^12 = 4096 combinations.
+
+Value of sequence number is 0 initially unless there are multiple IDs getting generated in 1 millisecond. Value will only increment if there are multiple IDs generated in 1 millisecond. 
+
+So in 1 millisecond it can generate 4096 values. That means in 1 sec it can generate 40,96,000 values.

@@ -26,3 +26,8 @@ The highest value timestamp can have been 2^41-1 = 2199023255551 ms
 
 Converting ms to years= 2199023255551ms / 1000 / 365 days/24hrs/3600 sec = 69 years. This approach will run of 69 years.
 
+## Datacenter ID and Machine ID
+
+Datacenter IDs and machine IDs are chosen at the startup. These values do not change as that will lead to ID conflicts. Once the system is up and running these values are fixed for specific datacenters and machines. 
+
+## Sequence Number

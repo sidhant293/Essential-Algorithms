@@ -19,4 +19,9 @@ The properties of twitter snowflake are-
 -	Machine ID – (5-bit) This gives us 2^5 machines per datacenters
 -	Sequence Number – (12-bit) For every ID that is generated on same millisecond, it is incremented by 1. Next millisecond again it is reset to 0
 
+## Timestamp
+
+Timestamp contains 41 bits. These bits are first converted into decimal. Then default epoc time is added. After addition it gives milliseconds. This millisecond is then converted into UTC time.
+The highest value timestamp can have been 2^41-1 = 2199023255551 ms
+Converting ms to years= 2199023255551ms / 1000 / 365 days/24hrs/3600 sec = 69 years. This approach will run of 69 years.
 

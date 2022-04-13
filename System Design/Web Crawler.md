@@ -14,3 +14,10 @@ Crawler should be
 ## High Lvl Design
 
 ![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Web_Crawler.drawio.png)
+
+- Seed URL – It contains the list of most popular sites. Sites can also be classified under various domains like fashion, travel, education etc. These sites act as a starting point for crawlers to crawl.
+- URL Frontier- It prioritizes the URLs like which one to crawl first.
+- URL downloader and renderer – It downloads the web pages from internet. DNS resolver is also used which converts URL into IP address. After downloading, pages are stored in Redis cache and older pages will be eventually pushed into disk.
+- Duplicate Detection and URL extraction- A lot of websites such as blogs copy content of other websites. This duplicate content will be detected and removed here. After that, the URLs from the valid webpages are extracted. 
+- URL Filter- These extracted URLs are filtered. Some malicious URLs will be filtered out here
+- URL Loader- These URLs are then checked, if they are not crawled then they are again sent to URL Frontier for crawling else they are saved in storage with some amount of web page data. So that if search happens and data gets matched then those URLs can be shown as output.

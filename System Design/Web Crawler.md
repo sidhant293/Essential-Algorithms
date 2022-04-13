@@ -10,3 +10,7 @@ Crawler should be
 - Extensible (more features can be added)
 - Fresh Pages it should have
 - Polite (don't put load on servers of other sites) 
+
+## High Lvl Design
+
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Web_Crawler.drawio.png)

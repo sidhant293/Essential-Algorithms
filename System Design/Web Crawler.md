@@ -30,4 +30,4 @@ Even before crawling we need to prioritize what to crawl. That is done by URL Fr
 
 ### URL Frontier
 
-![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Web_Crawler.drawio.png)
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/URL_Frontier.drawio.png)

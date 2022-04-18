@@ -21,3 +21,13 @@ Crawler should be
 - Duplicate Detection and URL extraction- A lot of websites such as blogs copy content of other websites. This duplicate content will be detected and removed here. After that, the URLs from the valid webpages are extracted. 
 - URL Filter- These extracted URLs are filtered. Some malicious URLs will be filtered out here
 - URL Loader- These URLs are then checked, if they are not crawled then they are again sent to URL Frontier for crawling else they are saved in storage with some amount of web page data. So that if search happens and data gets matched then those URLs can be shown as output.
+
+## Deep Dive
+
+When URLs are take from seed server, they need to be crawled. Crawling can be done in DFS or BFS fashion. As a webpage has many deep links so DFS is not fisible. BFS will be used because it will exhaust current page completely before going to new page.
+
+Even before crawling we need to prioritize what to crawl. That is done by URL Frontier
+
+### URL Frontier
+
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Web_Crawler.drawio.png)

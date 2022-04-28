@@ -16,3 +16,7 @@ CONSUMERS--  QUEUE --- FAN OUT
 
 Consumers will just take the requests and send it to queue. In this way new requests will always be taken. No waiting time will reduce. Queue on the other hand will send notifications to fan out service which will handle sending it to appropriate users. 
 But it’s a lot of work for one service, we will decouple more.
+
+## High Level Design
+
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/NotificatioService_highLvl.drawio.png)

@@ -27,3 +27,21 @@ But it’s a lot of work for one service, we will decouple more.
 -	According to which type of notification should be send to users, the message is pushed to that particular queue. Workers are present which have only one job to send user and notification data to appropriate handlers.
 -	Handlers can be third party like MailChimp for email. Workers will keep track of whether notification send was successful or not. They will save each notification in DB, if send successfull then delete from DB if not retry after some time. This is done so that if a worker crashes then we can recover the data.
 -	Analytics service is important here as it calculates how much notifications and send to each user and also what type of notification. This data is used to filter out users as discussed in fan out service
+
+## Validation and Priority Service
+
+Request will to be validated and a payload will be created here. Then the payload is inserted into one of the priority queue
+-------------| P0 |----------------
+-------------| P1 |----------------
+-------------| P2 |----------------
+                .
+                .
+                .
+-------------| Pn |----------------
+
+There priority queues are fixed and have a bias. Payload will get into one of the priority queue. Workers will be assigned to each queue and workers can autoscale based on load. Data from this service will be pushed to fan out service.
+
+## Fan Out Service
+
+
+

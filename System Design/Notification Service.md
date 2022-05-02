@@ -30,18 +30,19 @@ But it’s a lot of work for one service, we will decouple more.
 
 ## Validation and Priority Service
 
-Request will to be validated and a payload will be created here. Then the payload is inserted into one of the priority queue
+Request will to be validated. Then it is inserted into one of the priority queue
+
 -------------| P0 |----------------
+
 -------------| P1 |----------------
+
 -------------| P2 |----------------
-                .
-                .
-                .
+                
 -------------| Pn |----------------
 
-There priority queues are fixed and have a bias. Payload will get into one of the priority queue. Workers will be assigned to each queue and workers can autoscale based on load. Data from this service will be pushed to fan out service.
+
+There priority queues are fixed and have a bias. Data will get into one of the priority queue. Workers will be assigned to each queue and workers can autoscale based on load. Data from this service will be pushed to fan out service.
 
 ## Fan Out Service
-
 
 

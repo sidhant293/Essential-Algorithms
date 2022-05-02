@@ -45,4 +45,9 @@ There priority queues are fixed and have a bias. Data will get into one of the p
 
 ## Fan Out Service
 
+- Creates payload for notification to be sent.
+- Gets a list of all the users from User DB to whom notifications need to be sent (one or multiple). This can be done in batches. Get one batch, process, move forward then again take another batch, process, move forward. 
+- Filter out users based on Preferences DB. eg Some users might have deselected email notifications , filter them out. 
+- Also rate limit on notifications sent. Critical notifications like OTP, transactional messages should always be sent but there is a rate limit on other promotional notifications.
+- All users that are left, they are sent to publisher
 

@@ -4,14 +4,14 @@ News feed is simlilar to posts which are shown on instagram or facebook
 
 ## Data
 
-DAU- 1 Billion
-1 User Follows - 500 Users
-Feed fetch for 1 user - 10 times
-Feed fetch for DAU - 10^10
+- DAU- 1 Billion
+- 1 User Follows - 500 Users
+- Feed fetch for 1 user - 10 times
+- Feed fetch for DAU - 10^10
 
-Size of 1 post - 1 KB
-And there are 500 posts in feed for 1 user so 500KB
-Data for DAU - 500TB
+- Size of 1 post - 1 KB
+- And there are 500 posts in feed for 1 user so 500KB
+- Data for DAU - 500TB
 
 ## API 
 

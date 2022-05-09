@@ -42,5 +42,36 @@ News feed is simlilar to posts which are shown on instagram or facebook
 | | | media- img or video data |
 | | | description- description of post |
 
+## Database Design 
 
+#### User Table
+
+| UserId | Email | DOB| Gender | ... |
+| :---  | :--- | :----| :---   | :--- |
+
+#### Follower Table
+
+| UserId | FollowId | 
+| :---  | :--- | 
+
+one UserId will have many Followers
+
+#### Post Table
+
+| PostId | UserId | CreateDateTime| Description | 
+| :---  | :--- | :----| :---- |
+
+one UserId will have many Posts
+
+#### PostMedia Table
+
+| PostId | MediaId |
+| :---  | :--- | 
+
+one PostId will have many Media
+
+#### Media Table
+
+| MediaId | Url | CreateDateTime| Type (photo/video) | 
+| :---  | :--- | :----| :---- |
 

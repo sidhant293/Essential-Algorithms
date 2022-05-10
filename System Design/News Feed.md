@@ -80,6 +80,73 @@ one PostId will have many Media
 
 Feed service will have two parts feed publish and feed generation
 
-### Publish Feed
+## Publish Feed
 
 ![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/News_Feed_Publish.drawio.png)
+
+### Web Servers
+They authenticate all incoming requests. Only vaild users should be able to post.
+Rate Limiting is also done here. Only specific number of posts are allowed within a peroid of
+time. This prevents spamming.
+
+### FanOut Service
+FanOut can be implemented in two ways 1) Push-Based 2) Pull Based
+
+#### Push Based
+Updates will be pushed to users
+
+**Pros**
+- Real Time Updated
+- Pre computer feed, fast reads
+
+**Cons**
+- Users which have many followers, push based is time consuming and reduces performance
+- Waste of resources for inactive users
+
+#### Pull Based
+Users will pull updates after specific peroid of time. System will generate feed and then users will view it
+
+**Pros**
+- No waste of resources for inactive users
+- No problem if users have many followers
+
+**Cons**
+- Slow reads, takes time to generate feed
+
+One thing we know is that users need to have minimum latency. They want updates realtime. Fast reads are required.
+So we will many use Push based approach with a slight modification.
+
+Normally push based approach will be followed but for famous people like celebrities this approach is quite an overhead.
+For celebrities we will use pull based approach. Celebrity posts data will be stored in a seprate DB. CDN will also be used for people who are
+famous all around the world.
+
+Flow of this approach is->
+- When a celebrity posts something just store it in celebrity DB.
+- When a normal user posts something call post service to store data
+- Get list of followers (userId's only)
+- Get last login data of users.
+- Filter out inactive users (Feed for them will be computed when they login).
+- Send postId and followers list to queue
+- Workers get data from queue and start populating news feed cache.
+
+Cache uses LRU. Data from cache will be persisted into disk at regular intervals so 
+that we can build cache again in case of failures.
+
+Key value pairs will be stored in cache.
+
+Key will be userId
+
+Value will be an array of objects like
+
+```json
+[
+    {postId,createrId,TimeStamp},
+    {postId,createrId,TimeStamp},
+    {postId,createrId,TimeStamp},
+    ...
+]
+```
+CreaterId- UserId of creater
+
+Only 20 recent posts will ve stored in cache for a particular user.
+Rest will be pushed to disk. In disk also feed older than 4 days will be removed.

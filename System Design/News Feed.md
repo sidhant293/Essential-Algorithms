@@ -75,3 +75,11 @@ one PostId will have many Media
 | MediaId | Url | CreateDateTime| Type (photo/video) | 
 | :---  | :--- | :----| :---- |
 
+
+## High Level Design 
+
+Feed service will have two parts feed publish and feed generation
+
+### Publish Feed
+
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/News_Feed_Publish.drawio.png)

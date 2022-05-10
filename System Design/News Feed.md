@@ -150,3 +150,14 @@ CreaterId- UserId of creater
 
 Only 20 recent posts will ve stored in cache for a particular user.
 Rest will be pushed to disk. In disk also feed older than 4 days will be removed.
+
+## Generate Feed
+
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/News_Feed_Generate.drawio.png)
+
+When a users asks for a request to get latest feed data then->
+- As feed has been precomputed get that feed from news feed cache
+- Check for updates in celebrity cache, fetch them also
+- Merge the data
+- Get user details (who posted a specific post) from user cache and get posts data from posts cache
+- Return the response

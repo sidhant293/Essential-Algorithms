@@ -138,7 +138,7 @@ Key will be userId
 
 Value will be an array of objects like
 
-```json
+```
 [
     {postId,createrId,TimeStamp},
     {postId,createrId,TimeStamp},

@@ -9,11 +9,9 @@ A chat system like whatsapp, facebook messanger
 - Storage for 5 years - 5 * 365 * 2TB= 3.6PB 
 
 ## Basic Design
-
 -----         -------         -------
 Users ------- Servers ------- Storage
 -----         -------         -------
-
 Basic design is that users are connected to servers. Sender send messages to server, server will store messages in storage and then route it to receiver.
 Receiver will also send acknowledgment back that message has been received. 
 

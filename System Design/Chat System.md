@@ -50,4 +50,6 @@ Messages are ordered by messageID. Thus messageID's should be unique and should 
 A messageID generator service can be made globally which will assign messages ids to incoming messages but this will be a bottleneck.
 Instead for each conversation (chat b/w 2 people or group) their will be a counter specific to that chat only.
 
+## High Level Design
 
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/chat_system.drawio.png)

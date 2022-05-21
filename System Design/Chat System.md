@@ -67,3 +67,20 @@ Instead for each conversation (chat b/w 2 people or group) their will be a count
 - The message (if any) and url are send to chat servers and same process follows
 - This uploading of asset is done separately so that it doesn't put load on the existing flow
 
+### Group Chat
+
+- User in a group sends a message. Message through chat servers go to group service.
+- Group service finds out all the users present in a group
+- Data from group service is forwarded to sessions service which finds out which user is online and connected to which server
+- Then it goes to message service where group messages data is updated and unread DB of offline users is populated
+- Messages to online users are send to Fanout service
+
+### Last Sceen / Online Status
+
+- There will be hundreds of people in someone’s contact list and status should be visible to all
+- But most of contacts don't need status, only those who are currently chatting or have opened someone’s chat profile want status info
+- A presence server is present which holds information **user | lastSceen**
+- Whenever a user performs some action like sends message, reads message. Last sceen of that user is updated.
+- But somethimes network disconnect also happens. So presence server sends heart beats to each user after every 3 seconds (can be any time)
+- If a user doesn't responds with in 10 seconds, it is marked offline
+- In order to check if User A wants to see User B status. When profile of User B is opened, a get request is send every 8-10 second to update status on APP

@@ -53,3 +53,17 @@ Instead for each conversation (chat b/w 2 people or group) their will be a count
 ## High Level Design
 
 ![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/chat_system.drawio.png)
+
+### One on One Chat
+
+- Users get connected to different chat servers
+- Chat servers send messages to sessions service which knows which user is connected to which server
+- Sessions service send messages to message service
+- If user is online (connected to a chat server - figured out by sessions service) message is saved in DB. Responds success to sessions service and message is send to fanout service.
+- Fanout service sends messages to correct server and the server sends it to user
+- If user is offline, message is saved to Unread DB. In this DB all messages which are yeh to recieved by user is stored
+- Whenever a user comes online, it first makes a request to message service to get all the unread messages
+- In case of assets like images or videos, request is first send to assets service to upload an asset. When asset is uploaded a url is responded back by service.
+- The message (if any) and url are send to chat servers and same process follows
+- This uploading of asset is done separately so that it doesn't put load on the existing flow
+

@@ -73,4 +73,71 @@ Updates will also be easy, just replace the pointer.
 
 ![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/TypeAhead.drawio.png)
                                                          
-                                                         
+
+### Trie Sets
+
+Each trie set has data present in a range. Trie sets can be partitioned into 26 different sets
+one for each alphabet (a-z). But load on sets would be unfair as some words are more used than others.
+
+So they are partitioned in such a way load is evenly distributed. Zookeeper will keep details of which trie set servers for what range.
+eg **Trie Set 1 => a - ac** , **Trie Set 2 => ad - be** ...
+
+If load on a trie set increases it can be further broken down.
+
+A single trie set will have multiple servers having same copy of data. So if one server is down then other can serve.
+
+Tries will be stored in server memory for fast lookups and processing. Servers will also be connected to a DB which gives persistent storage.
+If server crashes then in new server trie can be rebuilt from DB
+
+DB will be a NOSQL store like Cassandra as it has high availability than SQL and easy to scale and shard. Also we don't need transactional support which SQL provides. 
+
+NOSQL stores have lower consistency than SQL but higher availability
+
+Data will be stored like
+```json
+"prefix":{
+    "count":258,
+    "childNodes": ["childPrefix1","childPrefix2","childPrefix3"]
+}
+```
+
+Each node, childNodes if it has any children and count of occurrence (if a proper word)
+
+Starting from the root, using BFS whole trie can be build up easily and stored in server
+
+When queries are asked, data needs to be updated also. That can't be done in same DB where reads are happening because in order to do so locks will be required which will lead to both decrease in read performance. 
+
+
+### Query Log Storage
+
+When a query is made it is also updated in log storage. Append strategy is used
+in logs as insertion happens very fast.
+
+Structure of logs will be
+**Query | Timestamp**
+
+When user types prefixes, possible suggestions will be returned to him. Either he would choose one of the suggestions or
+else he would write the possible words and click on search.
+
+When this proper search query is made, then only data is appended in logs. There is no need to log incomplete prefixes.
+only when accurate search is made, importance of those accurate words will be considered.
+
+### Aggregators
+
+As logs are stored, we need to aggregate them and calculate count of words
+
+As data is large we can do sampling. For every 1000 entires, 1 count will be updated. This will reduce all over sample size but still more searched words will have higher
+relative count. This aggregated count is stored in DB. 
+
+#### Process of aggregation and all other steps after this isn't realtime. Depends on how much recently updated data you need, these processess can run after each hour or day or even week. 
+
+
+### Workers 
+
+Workers just take aggregated data from DB and update them into tries.
+
+Now here we follow master slave architecture. There will be slave trie sets exactly same like master but they don’t serve any server requests.
+
+All the updates are done on these slaves and then they are switched with the masters. Slaves become masters previous masters clone from existing masters and receive futher updates.
+
+This cycle goes on so that read performance isn’t suffered while updating data.

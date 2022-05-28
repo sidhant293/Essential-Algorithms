@@ -69,6 +69,8 @@ Updates will also be easy, just replace the pointer.
                                                    12   8                           25
                         
                                                          
-#### CReate Diagram
+## Deep Dive
+
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/TypeAhead.drawio.png)
                                                          
                                                          

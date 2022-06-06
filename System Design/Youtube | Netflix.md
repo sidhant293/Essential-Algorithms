@@ -1,0 +1,58 @@
+
+# Youtube/Netflix System Design
+
+- DAU- 80M
+- Videos viewed by people in 1 day- 5
+- 1% of DAU upload video each day
+
+Data calculation - 1% * 80M * 300MB (avg. video size) = 240TB/day
+
+This calculation is only for one format. Videos will be stored in multiple formats and multiple resolutions
+
+#### As DAU is very high, we will have seprate flows for upload and stream
+
+## Upload
+
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Youtube_Upload_Flow.drawio.png)
+
+### Application Servers
+
+- Application servers connected to UserDB and MetadataDB. 
+- When a user wants to upload a file, first its metadata is required like video name, tags etc. Those things are uploaded first in MetadataDB.
+- UserDB is a SQL structure but MetadataDB is NOSQL. This is because metadata might not have a rigid schema.
+- Application servers also have their own load balancer
+
+### Workers
+
+- When a upload request is initialed by a users, the request goes to workers. Separate workers are assigned task to upload files as upload takes a hudge bandwidth so this task can't be given to normal servers. Other requests will get blocked
+- Workers don't upload file as a whole.
+- From the user's end only the video files is send in chunks (10sec video files) and those files are uploaded and saved into a file storage like S3.
+- This is also done to reduce failures. If a upload fails in between then whole process doesn't need to start again. It can start after the last chunk present.
+
+### Content Processors
+
+- Content Processors are a collection of servers each having a specific task.
+- Chunks from S3 are taken up and are broken into more shorter files. This process can also be done in parallel. No need to wait for one chunk to complete then go to another.
+- Files are broken in more smaller pieces so that video processing can be done at faster rate
+- The smaller chunks are then filtered for privacy, nudity etc. If any of this kind of content is present then process can stop here and user will be notified.
+- Now video files will be converted into different formats and resolutions. 
+- Video needs to be played on a variety of devices and different devices have different resolutions and support different formats.
+- A matrix can be created which shows which format should be available in which resolutions
+
+|| 144 | 240 | 360 | 480 | 720 | 1080 |
+| :--   | :-- | :-- | :-- | :-- | :-- | :-- |
+| Mp4 | `True` | `True`  | `True`  | `True`  | `True`  | `True`  |
+| Avi | `True` | `True`  | `True`  | `False`  | `False`  | `False`  |
+
+#### This is not correct value just an example.
+- Advantage of this approach is that a new resolution or format can be easily added.
+
+### CDN
+- Content delivery network (CDN) has servers present in all over the world at specific locations
+- These servers hold static content like videos, static webpages which dont change so often.
+- It reduces the request time for users and data is provided very fast.
+- Redundancy is also a use case. If some server at a location goes down, data can be delivered by other server.
+- It also helps to geographically categorise data. Eg. If a new movie is launched in India, it will be placed in servers closed to India so that users have seamless experience.
+
+### FLOW (Upload)
+- We have an initial load balancer present which sends requests to either application servers or workers.

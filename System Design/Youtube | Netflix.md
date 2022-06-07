@@ -11,7 +11,7 @@ This calculation is only for one format. Videos will be stored in multiple forma
 
 #### As DAU is very high, we will have seprate flows for upload and stream
 
-## Upload
+## Video Upload
 
 ![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Youtube_Upload_Flow.drawio.png)
 

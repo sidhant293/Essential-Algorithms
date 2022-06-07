@@ -46,6 +46,11 @@ This calculation is only for one format. Videos will be stored in multiple forma
 
 #### This is not correct value just an example.
 - Advantage of this approach is that a new resolution or format can be easily added.
+- All the steps mentioned above will be executed using a DAG (direct acyclic graph). It will take care of the dependencies.
+- Steps such as conveting video files into various formats will be done in parallel as they don't have any dependency over each other.
+- Two queues are present, a task queue and a worker queue.
+- Task queue is a priority queue that has all the tasks that need to be done and worker queue contains all the free workers.
+- Task is removed from queue and assigned to a free worker.
 
 ### CDN
 - Content delivery network (CDN) has servers present in all over the world at specific locations

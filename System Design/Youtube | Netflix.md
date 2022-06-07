@@ -56,3 +56,9 @@ This calculation is only for one format. Videos will be stored in multiple forma
 
 ### FLOW (Upload)
 - We have an initial load balancer present which sends requests to either application servers or workers.
+- Initailly request does to servers where partial metadata of video is stored
+- Next request goes to the workers, who upload the file into S3 in chunks.
+- S3 link and other payload is pushed to a message queue which again sends it to content processing service.
+- Content Processing Service gets the file from S3 link, does its processing and processed files are stored in CDN
+- Remaining metadata (video playtime, number of formats, resolutions etc) is pushed to a queue which sends it to application servers which update it to MetadataDB.
+- Now file uploading is complete, notification service is called which notifies the user that file is uploaded and recommendation service gets called which uses ML/AI for recommendations

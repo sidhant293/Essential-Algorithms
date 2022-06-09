@@ -67,3 +67,16 @@ This calculation is only for one format. Videos will be stored in multiple forma
 - Content Processing Service gets the file from S3 link, does its processing and processed files are stored in CDN
 - Remaining metadata (video playtime, number of formats, resolutions etc) is pushed to a queue which sends it to application servers which update it to MetadataDB.
 - Now file uploading is complete, notification service is called which notifies the user that file is uploaded and recommendation service gets called which uses ML/AI for recommendations
+
+
+## Video Stream
+
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/System%20Design/Images/Youtube_Stream.drawio.png)
+
+- When a user requests something it first goes to servers where request is validated. Validation is required for cases like age permission, private videos etc.
+- If it is a search request, it will be routed to search service.
+- When a user requests a video, request goes to CDN. Popular videos are cached in CDN as they serve high traffic. (20% of data receives 80% of traffic).
+- If it is not present in CDN, request will go to storage service like S3 from where it will recieve video data.
+- Search Service will provide with video links also. High reads occur on video data and we need a scalable database also so NOSQL can be used here. Eventually consistency can do.
+- Analytics is done on each request. Videos that are more searched for will be included in CDN and if some videos are loosing their traffic they can be removed from CDN.
+- Different CDN servers are placed in different geographical locations to reduce video latency. Content specific to a location will be placed in near servers.

@@ -34,7 +34,7 @@ As we know using append strategy data will be in arbitrary format
 | User 2 | 12 |
 | User 7 | 37 |
 
-In Indexing, keys are stored in stored format in cache with value as offset of disk
+In Indexing, keys are stored in sorted format in cache with value as offset of disk
 
 | Key  | Offset   |
 | :-------- | :------- |
@@ -63,7 +63,7 @@ As these files will have duplicates, we will take only the latest entry for each
 The merged file will again have index table to make read faster.
 There will be one writer and multiple readers for disk level. As data is immutable, we don’t need locks.
 
-So, from this we understood that if write request then route to active file and if read request then route to active file.
+So, from this we understood that if write request then route to active file and if read request then route to active file , not present then check merge file.
 
 ## Recovery
 

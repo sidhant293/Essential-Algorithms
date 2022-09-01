@@ -23,7 +23,7 @@ In long polling, a connection is made between client and server. Client repetiti
 
 But this approach has some problems-
 No way for server to tell if client is disconnected 
-HTTP is a stateless protocol. As there will be multiple chat servers and requests will be load balanced among those servers, we can tell which client will be connected to which server
+HTTP is a stateless protocol. As there will be multiple chat servers and requests will be load balanced among those servers, we can't tell which client will be connected to which server
 This is not ideal for a real time application. It will lead to waste of resources for the users who don’t chat much as long polling will keep on making connections
 
 ### Web Sockets

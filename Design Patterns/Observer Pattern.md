@@ -8,3 +8,12 @@ a record of the Observers. Whereas, in Publisher/Subscriber, publishers and subs
 They simply communicate with the help of message queues or broker
 
 ![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/Design%20Patterns/Assets/observer_pattern.drawio.png)
+
+
+```java
+
+public interface Subject{
+  public void registerObserver()
+}
+
+```

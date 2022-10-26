@@ -2,6 +2,8 @@
 
 Objects are wrapped with other objects which extend their functionality 
 
+![alt text](https://github.com/sidhant293/Essential-Algorithms/blob/main/Design%20Patterns/Assets/Decorator_Pattern.drawio.png)
+
 ```java
 
 public abstract class Beverage{
@@ -85,4 +87,17 @@ public class ConcreteCondimentTwo extends CondimentDecorator{
     }
 }
 
+```
+#### Similarly more ConcreteBeverages and ConcreteCondiments can be created
+
+```java
+// new beverage created
+Beverage beverage = new ConcreteBeverageOne();
+
+// condiments wrapped over beverage
+beverage = new ConcreteCondimentOne(beverage);
+beverage = new ConcreteCondimentTwo(beverage);
+beverage = new ConcreteCondimentOne(beverage);
+
+// if cost() is called for beverage, cost will be recursivly calculated
 ```

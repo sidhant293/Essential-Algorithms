@@ -42,3 +42,33 @@ Append-only strategy is better than in-palce update strategy -
 ### Hash Index Problem
 - Hash index must fit in memory, if we have a large number of keys this wont work. Also when keys grow then more collisions occure so maintaining hash index is more of a overhead.
 - We can perform range queries on hash indexes
+
+## SSTables and LSM Trees
+
+So above we have sceen that the data in log files is in order in which they are written which makes them hard for ranged queries.
+
+If data in files is in sorted format of keys lets see what will be the advantages - 
+- Merging two segmets will be simple and efficient even if files are bigger than the available memory. As files will be in sorted order, merge sort algorith can be applied. While merging if same keys appear then take the key which is more recent as it will have updated data.
+- To find a key in file we no longer need to have an index which has all the keys in memory. We can create a sparse index which will take up less memory. From below example we canm get the gist that suppose key 250 will be between offset100 and offset253
+
+```
+.
+.
+key211 offset100
+key310 offset253
+key960 offset534
+.
+.
+```
+
+So to get data to be in sorted order we will use data structures like AVL trees or Red Black Trees.
+
+Our database will now work as follows-
+- Store an in memory balanced tree data structure which is sometimes known as *memtable*
+- When *memtable* reaches a certain size presist the data in disk as SSTable(which will be in sorted format). Writes can continue to new *memtable* instance.
+- To read from DB, first seach memtable then most recent on disk segment, second most recent on disk segment...
+- In background merging process of segments will happen.
+
+There is now only one problem if databse crashes then recent writes which are present only in memory will be lost. To solve that we will have a seperate log file which will write in just append only fashion. This log file wont be sorted, it is just maintained in case DB crashes
+
+Also there will be time consumed on looking for an enetry which does not exist in DB. To solve that we can use bloom filter. Bloom filter can tell us that key does not exit in DB

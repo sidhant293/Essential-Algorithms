@@ -39,6 +39,6 @@ Append-only strategy is better than in-palce update strategy -
 - Appending and then merging log files is much faster than inplace writes
 - Crash recovery is easy. We dont have to think about use cases when a value was being updated in place and crash occured.
 
-### Has Index Problem
+### Hash Index Problem
 - Hash index must fit in memory, if we have a large number of keys this wont work. Also when keys grow then more collisions occure so maintaining hash index is more of a overhead.
 - We can perform range queries on hash indexes

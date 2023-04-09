@@ -72,3 +72,29 @@ Our database will now work as follows-
 There is now only one problem if databse crashes then recent writes which are present only in memory will be lost. To solve that we will have a seperate log file which will write in just append only fashion. This log file wont be sorted, it is just maintained in case DB crashes
 
 Also there will be time consumed on looking for an enetry which does not exist in DB. To solve that we can use bloom filter. Bloom filter can tell us that key does not exit in DB
+
+## B-TREES
+
+B-Trees is the data structure which is usually used in DBs.
+
+B-Trees are similar to LSM but as LSM have varibale size segments, B-Trees have fixed size segments (usually 4KB)
+
+A page contains several keys and references to child pages. Page can contain value of keys inline or reference to where data is stored. 
+
+Data is stored in ranges. eg
+
+```
+        ref|100|ref|200|ref
+         /       |        \
+        /        |         \
+       ...       |          ...
+            120|val|121|val
+```
+
+For an insert, update or get query we go to the root page, root page will redirect to child page... eventually we'll reach the leaf page where we can find the value.
+
+During insert if the the range of page can't encompass the value then page is broken down into 2 pages.
+
+This algorith ensures that keys always have a depth of logN.
+
+The number of child references which a page can contain is known as *branching factor*. A 4lvl tree of size page size 4KB each with a branching factor of 500 can store upto 256TB

@@ -98,3 +98,15 @@ During insert if the the range of page can't encompass the value then page is br
 This algorith ensures that keys always have a depth of logN.
 
 The number of child references which a page can contain is known as *branching factor*. A 4lvl tree of size page size 4KB each with a branching factor of 500 can store upto 256TB
+
+In order to make B tree resilient to crashes a *write ahead log* is also present. Its an append only log, if database crashes then it can be easily recoverd from reading the log
+
+##B-Tree vs LSM-Tree
+
+LSM are faster for writes but B-tree provides a better read.
+
+In LSM we just need to append to log but in B-Tree somethimes multiple pages can be changed during writes.
+
+LSM provides slower writes because sometimes compaction process interferes with the performance of reads.
+
+Main advantage of B-Tree is tat each key is present exactly once in B-Tree but in LSM there can be multiple copies of the same key. Thus B-tree simlpy provides strong transactional semantics.

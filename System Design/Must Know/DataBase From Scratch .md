@@ -41,7 +41,7 @@ Append-only strategy is better than in-palce update strategy -
 
 ### Hash Index Problem
 - Hash index must fit in memory, if we have a large number of keys this wont work. Also when keys grow then more collisions occure so maintaining hash index is more of a overhead.
-- We can perform range queries on hash indexes
+- We can't perform range queries on hash indexes
 
 ## SSTables and LSM Trees
 
